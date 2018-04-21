@@ -1,5 +1,5 @@
 import config from './config/config';
-import * as models from './models';
+import { User, Product } from './models';
 
-const user = new models.User();
-const product = new models.Product();
+const user = new User();
+const product = new Product();
