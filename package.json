@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/Savsan/nodejs-training#readme",
   "dependencies": {
-    "underscore": "^1.8.3"
+    "underscore": "1.8.3"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
