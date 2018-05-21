@@ -20,6 +20,7 @@
   "homepage": "https://github.com/Savsan/nodejs-training#readme",
   "dependencies": {
     "csvjson": "5.0.0",
+    "minimist": "1.2.0",
     "underscore": "1.8.3"
   },
   "devDependencies": {
