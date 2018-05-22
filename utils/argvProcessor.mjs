@@ -16,7 +16,7 @@ export default class ArgvProcessor {
         const hasArgs = Object.keys(this.args).length > 1;
 
         if (!hasArgs) {
-            console.error(`Error: No one argument were passed.`);
+            console.error(`Error: Wrong input. No one argument were passed.`);
             this.showHelp();
             return false;
         } else {
@@ -39,7 +39,7 @@ export default class ArgvProcessor {
     processArguments () {
         const { action, file } = this.args;
         const argsWithoutKey = this.args._;
-        const hasAction = typeof action === 'string' || this[action];
+        const hasAction = typeof action === 'string' && this[action];
 
         if (!hasAction) {
             this.showHelp('Action error.');
