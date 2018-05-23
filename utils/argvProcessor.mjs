@@ -7,25 +7,13 @@ export default class ArgvProcessor {
     }
 
     run () {
-        if (this.hasArguments()) {
-            this.hasHelper() ? this.showHelp() : this.processArguments();
-        }
-    }
-
-    hasArguments () {
-        const hasArgs = Object.keys(this.args).length > 1;
-
-        if (!hasArgs) {
-            console.error(`Error: Wrong input. No one argument were passed.`);
-            this.showHelp();
-            return false;
-        } else {
-            return true;
-        }
+        this.hasHelper() ? this.showHelp() : this.processArguments();
     }
 
     hasHelper () {
-        const firstArg = Object.keys(this.args)[1].match(/[A-Za-z]/g).join('');
+        const firstArg = Object.keys(this.args).length > 1 ?
+            Object.keys(this.args)[1].match(/[A-Za-z]/g).join('') :
+            null;
 
         return firstArg === 'help' || firstArg === 'h';
     }
@@ -38,8 +26,8 @@ export default class ArgvProcessor {
 
     processArguments () {
         const { action, file } = this.args;
-        const argsWithoutKey = this.args._;
         const hasAction = typeof action === 'string' && this[action];
+        const argsWithoutKey = this.args._;
 
         if (!hasAction) {
             this.showHelp('Action error.');
@@ -49,31 +37,34 @@ export default class ArgvProcessor {
 
         if (file) {
             this.processCommands(action, file);
-        } else if (!file && argsWithoutKey.length) {
+        } else if (!file && (action === 'reverse' || action === 'transform')) {
             this.processCommands(action, argsWithoutKey);
         } else {
-            this.showHelp(`No one arguments weren't passed to '${action}' action.`);
+            console.error(`No one arguments weren't passed to '${action}' action.`);
             this.showHelp();
         }
     }
 
-    processCommands (command, args) {
+    processCommands (action, args) {
         const isArrayOfArgs = _.isArray(args);
 
         if (!isArrayOfArgs) {
             if (typeof args === 'string' && args) {
-                this[command](args);
+                this[action](args);
             } else {
-                this.showHelp(`Wrong argument passed to '${command}' action.`);
+                console.error(`Wrong argument passed to '${action}' action.`);
                 this.showHelp();
             }
         } else {
+            if (action === 'reverse' || action === 'transform') {
+                this[action](...args);
+                return;
+            }
             _.map(args, (argument) => {
                 if (typeof argument === 'string' && argument) {
-                    console.log(`Process command ${command} with arg ${argument}`);
-                    this[command](argument);
+                    this[action](argument);
                 } else {
-                    this.showHelp(`Wrong argument passed to '${command}' action.`);
+                    console.error(`Wrong argument passed to '${command}' action.`);
                     this.showHelp();
                 }
             });
