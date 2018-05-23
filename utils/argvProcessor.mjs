@@ -3,6 +3,14 @@ import _ from 'underscore';
 export default class ArgvProcessor {
     constructor (args) {
         this.args = args;
+        this.actionShortCuts = {
+                'r': 'reverse',
+                't': 'transform',
+                'o': 'outputFile',
+                'cf': 'convertFromFile',
+                'ct': 'convertToFile',
+                'cb': 'cssBundler',
+        };
         this.helpMessage = 'Help message';
     }
 
@@ -25,22 +33,24 @@ export default class ArgvProcessor {
     }
 
     processArguments () {
-        const { action, file } = this.args;
-        const hasAction = typeof action === 'string' && this[action];
+        const { action, file, path } = this.args;
+        const method = this[action] ? action : this.actionShortCuts[action];
         const argsWithoutKey = this.args._;
 
-        if (!hasAction) {
-            this.showHelp('Action error.');
+        if (!method) {
+            console.error('Action error.');
             this.showHelp();
             return false;
         }
 
         if (file) {
-            this.processCommands(action, file);
-        } else if (!file && (action === 'reverse' || action === 'transform')) {
-            this.processCommands(action, argsWithoutKey);
+            this.processCommands(method, file);
+        } else if (path && method === 'cssBundler') {
+            this.processCommands(method, path);
+        } else if (!file && (method === 'reverse' || method === 'transform')) {
+            this.processCommands(method, argsWithoutKey);
         } else {
-            console.error(`No one arguments weren't passed to '${action}' action.`);
+            console.error(`No one arguments weren't passed to '${method}' action.`);
             this.showHelp();
         }
     }

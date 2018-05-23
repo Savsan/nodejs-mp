@@ -1,6 +1,7 @@
 import ArgvProcessor from './argvProcessor';
 import minimist from 'minimist';
 import fs from 'fs';
+import fsPromises from 'fs/promises';
 import through2 from 'through2';
 import csvjson from 'csvjson';
 
@@ -8,11 +9,13 @@ const argv = minimist(process.argv.slice(2), {
     alias: {
         'action': 'a',
         'file': 'f',
+        'path': 'p',
         'reverse': 'r',
         'transform': 't',
         'outputFile': 'o',
         'convertFromFile': 'cf',
         'convertToFile': 'ct',
+        'cssBundler': 'cb',
         'help': 'h'
     }
 });
@@ -86,8 +89,20 @@ class Streams extends ArgvProcessor {
         }
     }
 
-    cssBundler () {
+    async cssBundler (filePath) {
+        const paths = await fsPromises.readdir(filePath);
+        const bundlePath = `${filePath}/bundle.css`;
+        const remoteResourcePath = `${filePath}/nodejs-homework3.css`;
+        const cssPaths = paths.filter(
+            path => path.slice(-3) === 'css' && path !== 'bundle.css' && path !== 'nodejs-homework3.css'
+        ).map(path => `${filePath}/${path}`);
+        const writeStream = fs.createWriteStream(bundlePath);
+        const readStream = fs.createReadStream(remoteResourcePath);
 
+        cssPaths.forEach(path => fs.createReadStream(path).pipe(writeStream));
+        readStream.on('data', (chunk) => {
+            fs.appendFile(bundlePath, chunk.toString(), function () {});
+        });
     }
 }
 
