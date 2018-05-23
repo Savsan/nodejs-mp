@@ -13,6 +13,7 @@ Run commands:
 - node --experimental-modules utils/streams.mjs --action=outputFile --file=data/mocks-data.csv
 - node --experimental-modules utils/streams.mjs --action=convertToFile --file=data/mocks-data.csv
 - node --experimental-modules utils/streams.mjs --action=convertFromFile --file=data/mocks-data.csv
+- node --experimental-modules utils/streams.mjs --action=cssBundler --path=data
 - node --experimental-modules utils/streams.mjs --help
 - node --experimental-modules utils/streams.mjs -h
 
