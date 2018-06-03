@@ -3,6 +3,9 @@ Task-4
 
 **NOTE:** use NodeJS v10.0.0+
 
+**!!! IMPORTANT !!!**
+Pay attention to port your app is running on in console output. If it different from port in curl, replace it :wink:
+
 Run commands:
 ```
 - npm install
@@ -20,8 +23,6 @@ Run commands:
   Stop server.
 
 - npm run dev
-
-**NOTE:** Pay attention to port your app is running on in console output. If it different from port in curl, replace it :wink:
 
 - curl -X GET localhost:8080/api/products
 - curl -X GET localhost:8080/api/products/0
