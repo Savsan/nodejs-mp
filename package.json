@@ -4,7 +4,7 @@
   "description": "Train project",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --experimental-modules app.mjs",
+    "dev": "node --experimental-modules --inspect index.mjs",
     "prod": "nodemon app.js --exec babel-node",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,8 +19,10 @@
   },
   "homepage": "https://github.com/Savsan/nodejs-training#readme",
   "dependencies": {
+    "cookie-parser": "1.4.3",
     "csvjson": "5.0.0",
-    "minimist": "1.2.0",
+    "express": "4.16.3",
+    "query-string": "6.1.0",
     "through2": "2.0.3",
     "underscore": "1.8.3"
   },
