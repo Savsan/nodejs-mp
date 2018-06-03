@@ -6,6 +6,19 @@ Task-4
 Run commands:
 ```
 - npm install
+
+- node --experimental-modules http-servers/html-server.mjs
+  To check, enter in browser http://localhost:8080 then http://localhost:8081
+  Stop server.
+
+- node --experimental-modules http-servers/json-server.mjs
+  To check, enter in browser http://localhost:8080
+  Stop server.
+
+- node --experimental-modules http-servers/plain-text-server.mjs
+  To check, enter in browser http://localhost:8080
+  Stop server.
+
 - npm run dev
 
 **NOTE:** Pay attention to port your app is running on in console output. If it different from port in curl, replace it :wink:
