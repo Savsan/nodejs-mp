@@ -23,7 +23,6 @@ export default class ProductController {
     }
 
     getReviewsByProduct (req, res) {
-        console.log(req.parsedCookies);
         const id = +req.params.id;
         const product = productModel.filter((product) => {
             return product.id === id;
@@ -39,6 +38,18 @@ export default class ProductController {
             }
         } else {
             res.status(400).json({error: 'No users with id: ' + id});
+        }
+    }
+
+    addProduct (req, res) {
+        const id = req.body.id;
+        const hasProduct = productModel[id];
+
+        if (hasProduct) {
+            res.status(400).json({error: 'Product with id: ' + id + ' already exist'});
+        } else {
+            productModel.push(req.body);
+            res.status(200).json(productModel);
         }
     }
 }

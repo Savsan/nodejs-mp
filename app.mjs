@@ -1,12 +1,13 @@
 import express from 'express';
-import cookieParser from "cookie-parser";
+// import cookieParser from "cookie-parser";
 import bodyParser from 'body-parser';
-import queryString from 'query-string';
+// import queryString from 'query-string';
 import { productRouter, userRouter } from './routes';
 
 const app = express();
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use((req, res, next) => {
     req.parsedQuery = JSON.stringify(req.query);
     next();

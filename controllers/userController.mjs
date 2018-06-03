@@ -1,6 +1,11 @@
+import userModel from "../models/userModel";
+
 export default class UserController {
     getAllUsers (req, res) {
-        console.log(req.parsedQuery);
-        res.send('get all of the users!!');
+        if (userModel.length) {
+            res.status(200).json(userModel);
+        } else {
+            res.status(400).json({error: 'No users in database'});
+        }
     }
 }
