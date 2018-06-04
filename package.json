@@ -1,0 +1,37 @@
+{
+  "name": "nodejs-mp",
+  "version": "1.0.0",
+  "description": "Train project",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --experimental-modules --inspect index.mjs",
+    "prod": "nodemon app.js --exec babel-node",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Savsan/nodejs-training.git"
+  },
+  "author": "Aliaksandr Varabyou",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Savsan/nodejs-training/issues"
+  },
+  "homepage": "https://github.com/Savsan/nodejs-training#readme",
+  "dependencies": {
+    "body-parser": "1.18.3",
+    "cookie-parser": "1.4.3",
+    "csvjson": "5.0.0",
+    "express": "4.16.3",
+    "through2": "2.0.3",
+    "underscore": "1.8.3"
+  },
+  "devDependencies": {
+    "babel-cli": "6.26.0",
+    "babel-core": "6.26.0",
+    "babel-preset-env": "1.6.1",
+    "babel-preset-stage-2": "6.24.1",
+    "babel-register": "6.26.0",
+    "nodemon": "1.17.3"
+  }
+}
