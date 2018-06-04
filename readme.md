@@ -22,6 +22,10 @@ Run commands:
   To check, enter in browser http://localhost:8080
   Stop server.
 
+- node --experimental-modules http-servers/echo-server.mjs
+  To check, send a POST request from postman for example.
+  Stop server.
+
 - npm run dev
 
 - curl -X GET localhost:8080/api/products
