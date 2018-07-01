@@ -1,4 +1,8 @@
 import productRouter from './productRouter';
 import userRouter from './userRouter';
+import authRouter from './authRouter';
+import googleAuthRouter from './authGoogleRouter';
+import facebookAuthRouter from "./authFacebookRouter";
+import twitterAuthRouter from "./authTwitterRouter";
 
-export { productRouter, userRouter };
+export { authRouter, googleAuthRouter, facebookAuthRouter, twitterAuthRouter, productRouter, userRouter };

@@ -1,4 +1,5 @@
 import { cookieParser, setSomeCookies } from './cookiesMiddleware';
 import queryParser from './queryMiddleware';
+import webTokenVerify from './authMiddleware';
 
-export { cookieParser, setSomeCookies, queryParser };
+export { webTokenVerify, cookieParser, setSomeCookies, queryParser };

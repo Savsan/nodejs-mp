@@ -8,4 +8,20 @@ export default class UserController {
             res.status(400).json({error: 'No users in database'});
         }
     }
+
+    getUserByCredentials (data) {
+        const { username, password } = data;
+        let user = null,
+            result = null;
+
+        if (userModel.length) {
+            user = userModel.filter((user) => user.username === username && user.password === password);
+
+            if (user.length) {
+                result = user[0];
+            }
+        }
+
+        return result;
+    }
 }
