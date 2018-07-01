@@ -54,9 +54,13 @@ export default class ProductController {
     }
 
     addProduct (req, res) {
+        const data = {
+            ...req.body
+        };
+
         Product.sync({force: false})
             .then(() => {
-                return Product.create(...req.body);
+                return Product.create(data);
             })
             .then((product) => {
                 console.log(JSON.stringify(product));

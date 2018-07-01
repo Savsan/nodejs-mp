@@ -5,7 +5,6 @@ Task-5
 
 **!!! IMPORTANT !!!**
 Pay attention to port your app is running on in console output. If it different from port in curl, replace it :wink:
-To check auth via **local strategy** use Postman.
 
 Run commands:
 ```
@@ -18,8 +17,8 @@ Run commands:
 - curl -X GET localhost:9090/api/products
 - curl -X GET localhost:9090/api/products/0
 - curl -X GET localhost:9090/api/products/0/reviews
-- curl -X POST --data "name=Valenki&brand=Nike&price=1000&options=[]&reviews=[]" localhost:9090/api/products
-- curl -X POST --data "name=Super Valenki&brand=Nike&price=1000&options=[]&reviews=[]" localhost:9090/api/products
+- curl -X POST --data "name=Valenki&brand=Reebok&price=500&options=[]&reviews=[]" localhost:9090/api/products
+- curl -X POST --data "name=Super Valenki&brand=Nike&price=550&options=[]&reviews=[]" localhost:9090/api/products
 - curl -X GET localhost:9090/api/users
 
 ```
