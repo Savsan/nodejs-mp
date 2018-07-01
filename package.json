@@ -4,7 +4,7 @@
   "description": "Train project",
   "main": "index.js",
   "scripts": {
-    "dev": "node --experimental-modules --inspect index.mjs",
+    "dev": "node --experimental-modules index.mjs",
     "prod": "nodemon app.js --exec babel-node",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,12 +24,17 @@
     "csvjson": "5.0.0",
     "express": "4.16.3",
     "express-session": "1.15.6",
+    "install": "^0.12.1",
     "jsonwebtoken": "8.3.0",
+    "npm": "^6.1.0",
     "passport": "0.4.0",
     "passport-facebook": "2.1.1",
     "passport-google-oauth": "1.0.0",
     "passport-local": "1.0.0",
     "passport-twitter": "1.0.4",
+    "pg": "^7.4.3",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.38.0",
     "through2": "2.0.3",
     "underscore": "1.8.3"
   },

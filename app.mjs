@@ -1,10 +1,19 @@
 import express from 'express';
 import session from 'express-session';
+import db from './database';
 import passport from 'passport';
 import { webTokenVerify, setSomeCookies, cookieParser, queryParser } from './middlewares'
 import bodyParser from 'body-parser';
 import { authRouter, googleAuthRouter, facebookAuthRouter,
         twitterAuthRouter, productRouter, userRouter } from './routes';
+
+db.authenticate()
+    .then(() => {
+        console.log('Connection to the database has been established successfully.');
+    })
+    .catch(err => {
+        console.error('Unable to connect to the database:', err);
+    });
 
 const app = express();
 
@@ -24,8 +33,8 @@ app.use('/auth',
     facebookAuthRouter,
     twitterAuthRouter
 );
-
-app.use('/api', webTokenVerify(),
+// webTokenVerify(),
+app.use('/api',
     productRouter,
     userRouter
 );
