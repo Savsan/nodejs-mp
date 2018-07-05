@@ -1,5 +1,5 @@
-import Sequelize from "sequelize";
+import mongoose from 'mongoose';
 
-const db = new Sequelize('postgres://postgres:admin@localhost:5432/nodejs_mp_db');
+const db = mongoose.connect('mongodb://localhost:27017/nodejs-test-db');
 
 export default db;

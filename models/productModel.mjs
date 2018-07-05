@@ -1,74 +1,74 @@
-import db from '../database';
-import Sequelize from 'sequelize';
+import mongoose from 'mongoose';
 
-const Product = db.define('Product', {
-    id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
+const ProductSchema = mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
     },
-    name: Sequelize.STRING,
-    brand: Sequelize.STRING,
-    price: Sequelize.DECIMAL,
-    options: {
-        type: Sequelize.ARRAY(Sequelize.TEXT),
-        get: function() {
-            return this.getDataValue('options').map((obj) => JSON.parse(obj));
-        },
-        set: function(arr) {
-            const data = Array.isArray(arr) ? arr : [];
-
-            return this.setDataValue('options', data.map((obj) => JSON.stringify(obj)));
-        }
+    brand: {
+        type: String,
+        required: true,
     },
-    reviews: {
-        type: Sequelize.ARRAY(Sequelize.TEXT),
-        get: function() {
-            const arr = this.getDataValue('reviews');
-
-            return this.getDataValue('reviews').map((obj) => JSON.parse(obj));
-        },
-        set: function(arr) {
-            const data = Array.isArray(arr) ? arr : [];
-
-            return this.setDataValue('reviews', data.map((obj) => JSON.stringify(obj)));
-        }
+    price: {
+        type: String,
+        required: true,
+    },
+    options: [],
+    reviews: [],
+    created_on: {
+        type: Date,
+        default: Date.now
     }
 });
 
-Product.sync({force: true}).then(() => {
-    return Product.create({
-        name: 'Supreme T-Shirt',
-        brand: 'Supreme',
-        price: 99.99,
-        options: [
-            { color: 'blue' },
-            { size: 'XL' }
-        ],
-        reviews: [
-            {
-                name: 'Alex',
-                review: 'Good product!!!'
-            },
-            {
-                name: 'Nick',
-                review: 'Awesome!!!'
-            },
-        ]
-    });
+const Product = mongoose.model('Products', ProductSchema);
+
+Product.create({
+    name: 'Supreme T-Shirt',
+    brand: 'Supreme',
+    price: 99.99,
+    options: [
+        { color: 'blue' },
+        { size: 'XL' }
+    ],
+    reviews: [
+        {
+            name: 'Alex',
+            review: 'Good product!!!'
+        },
+        {
+            name: 'Nick',
+            review: 'Awesome!!!'
+        },
+    ]
+}, function (err, product) {
+    if (err) {
+        console.error(err);
+    } else {
+        console.log(`Product ${product.name} has been added to database.`)
+    }
 });
 
-Product.sync({force: true}).then(() => {
-    return Product.create({
-        name: 'Supreme T-Shirt V2',
-        brand: 'Supreme',
-        price: 199.99,
-        options: [
-            {color: 'white'},
-            {size: 'XXL'}
-        ],
-        reviews: []
-    });
+Product.create({
+    name: 'Supreme T-Shirt V2',
+    brand: 'Supreme',
+    price: 199.99,
+    options: [
+        { color: 'red' },
+        { size: 'M' }
+    ],
+    reviews: [
+        {
+            name: 'Helen',
+            review: 'Very nice!!'
+        }
+    ]
+}, function (err, product) {
+    if (err) {
+        console.error(err);
+    } else {
+        console.log(`Product ${product.name} has been added to database.`)
+    }
 });
 
 export default Product;

@@ -3,15 +3,12 @@ import session from 'express-session';
 import db from './database';
 import { setSomeCookies, cookieParser, queryParser } from './middlewares'
 import bodyParser from 'body-parser';
-import { productRouter, userRouter } from './routes';
+import { productRouter, userRouter, cityRouter } from './routes';
 
-db.authenticate()
-    .then(() => {
-        console.log('Connection to the database has been established successfully.');
-    })
-    .catch(err => {
-        console.error('Unable to connect to the database:', err);
-    });
+db.then(
+    () => { console.log('Connection to the database has been established successfully.') },
+    err => { console.error('Unable to connect to the database:', err); }
+);
 
 const app = express();
 
@@ -24,7 +21,8 @@ app.use(queryParser());
 
 app.use('/api',
     productRouter,
-    userRouter
+    userRouter,
+    cityRouter
 );
 
 export default app;
