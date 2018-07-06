@@ -8,5 +8,6 @@ productRouter.get('/products', (req, res) => productController.getAllProducts(re
 productRouter.get('/products/:id', (req, res) => productController.getProductById(req, res));
 productRouter.get('/products/:id/reviews', (req, res) => productController.getReviewsByProduct(req, res));
 productRouter.post('/products', (req, res) => productController.addProduct(req, res));
+productRouter.delete('/products/:id', (req, res) => productController.deleteProductById(req, res));
 
 export default productRouter;

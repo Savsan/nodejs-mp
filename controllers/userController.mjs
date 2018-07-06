@@ -12,7 +12,19 @@ export default class UserController {
             } else {
                 res.status(200).json(users);
             }
+        });
+    }
 
+    deleteUserById (req, res) {
+        const id = req.params.id;
+
+        User.findOneAndDelete(id, function(err, user) {
+            if (err) {
+                res.status(500).send({error: err});
+            } else {
+                console.log(`User: ${user.firstName} has been deleted from the database.`)
+                res.status(200).json(user);
+            }
         });
     }
 }

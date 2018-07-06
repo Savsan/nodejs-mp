@@ -5,5 +5,6 @@ const userRouter = express.Router();
 const userController = new UserController();
 
 userRouter.get('/users', (req, res) => userController.getAllUsers(req, res));
+userRouter.delete('/users/:id', (req, res) => userController.deleteUserById(req, res));
 
 export default userRouter;

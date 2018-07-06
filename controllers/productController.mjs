@@ -67,4 +67,17 @@ export default class ProductController {
             }
         });
     }
+
+    deleteProductById (req, res) {
+        const id = req.params.id;
+
+        Product.findOneAndDelete(id, function(err, product) {
+            if (err) {
+                res.status(500).send({error: err});
+            } else {
+                console.log(`Product: ${product.name} has been deleted from the database.`)
+                res.status(200).json(product);
+            }
+        });
+    }
 }
