@@ -75,8 +75,12 @@ export default class ProductController {
             if (err) {
                 res.status(500).send({error: err});
             } else {
-                console.log(`Product: ${product.name} has been deleted from the database.`)
-                res.status(200).json(product);
+                if (!product) {
+                    res.status(404).json({message: `Product with id: ${id} doesn't exists in the database.`});
+                } else {
+                    console.log(`Product: ${product.name} has been deleted from the database.`)
+                    res.status(200).json(product);
+                }
             }
         });
     }
