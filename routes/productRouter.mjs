@@ -4,10 +4,10 @@ import { ProductController } from '../controllers';
 const productRouter = express.Router();
 const productController = new ProductController();
 
-productRouter.get('/products', (req, res) => productController.getAllProducts(req, res));
-productRouter.get('/products/:id', (req, res) => productController.getProductById(req, res));
-productRouter.get('/products/:id/reviews', (req, res) => productController.getReviewsByProduct(req, res));
-productRouter.post('/products', (req, res) => productController.addProduct(req, res));
-productRouter.delete('/products/:id', (req, res) => productController.deleteProductById(req, res));
+productRouter.get('/products', productController.getAllProducts);
+productRouter.get('/products/:id', productController.getProductById);
+productRouter.get('/products/:id/reviews', productController.getReviewsByProduct);
+productRouter.post('/products', productController.addProduct);
+productRouter.delete('/products/:id', productController.deleteProductById);
 
 export default productRouter;

@@ -1,8 +1,8 @@
 import express from 'express';
 import session from 'express-session';
 import db from './database';
-import { setSomeCookies, cookieParser, queryParser } from './middlewares'
-import bodyParser from 'body-parser';
+import { cookieParser, queryParser } from './middlewares'
+import sessionConfig from './config/sessionConfig';
 import { productRouter, userRouter, cityRouter } from './routes';
 
 db.then(
@@ -12,10 +12,9 @@ db.then(
 
 const app = express();
 
-app.use(session({ secret: 'secret', resave: true, saveUninitialized: true }));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(setSomeCookies());
+app.use(session(sessionConfig));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(queryParser());
 

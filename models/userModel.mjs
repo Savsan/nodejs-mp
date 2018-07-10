@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import userData from "../config/mock-data/userData";
 
 const UserSchema = mongoose.Schema({
     firstName: {
@@ -33,34 +34,12 @@ const UserSchema = mongoose.Schema({
 
 const User = mongoose.model('Users', UserSchema);
 
-User.create({
-    firstName: 'Alex',
-    lastName: 'Varabyou',
-    username: 'padawan',
-    password: '123',
-    email: 'padawan@gmail.com',
-    status: 'Padawan'
-}, function (err, user) {
+userData.map((user) => User.create(user, function (err, user) {
     if (err) {
-        console.error(err);
+        console.trace(err);
     } else {
-        console.log(`User ${user.firstName} has been added to database.`)
+        console.log(`User ${user.firstName} has been added to database.`);
     }
-});
-
-User.create({
-    firstName: 'Vladislav',
-    lastName: 'Kovaliov',
-    username: 'jedi',
-    password: '1234',
-    email: 'jedi@gmail.com',
-    status: 'Jedi'
-}, function (err, user) {
-    if (err) {
-        console.error(err);
-    } else {
-        console.log(`User ${user.firstName} has been added to database.`)
-    }
-});
+}));
 
 export default User;

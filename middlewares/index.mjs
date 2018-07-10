@@ -1,4 +1,4 @@
-import { cookieParser, setSomeCookies } from './cookiesMiddleware';
+import cookieParser from './cookiesMiddleware';
 import queryParser from './queryMiddleware';
 
-export { cookieParser, setSomeCookies, queryParser };
+export { cookieParser, queryParser };

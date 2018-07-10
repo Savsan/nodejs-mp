@@ -59,7 +59,6 @@ export default class ProductController {
 
         Product.create(data, function (err, product) {
             if (err) {
-                console.error(err);
                 res.status(500).send({error: err});
             } else {
                 console.log(`Product ${product.name} has been added to database.`);

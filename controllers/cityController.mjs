@@ -26,7 +26,6 @@ export default class CityController {
 
         City.create(data, function (err, city) {
              if (err) {
-                 console.error(err);
                  res.status(500).send({error: err});
              } else {
                  console.log(`City ${city.name} has been added to database.`);

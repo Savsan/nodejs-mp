@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import productData from "../config/mock-data/productData";
 
 const ProductSchema = mongoose.Schema({
     name: {
@@ -23,52 +24,12 @@ const ProductSchema = mongoose.Schema({
 
 const Product = mongoose.model('Products', ProductSchema);
 
-Product.create({
-    name: 'Supreme T-Shirt',
-    brand: 'Supreme',
-    price: 99.99,
-    options: [
-        { color: 'blue' },
-        { size: 'XL' }
-    ],
-    reviews: [
-        {
-            name: 'Alex',
-            review: 'Good product!!!'
-        },
-        {
-            name: 'Nick',
-            review: 'Awesome!!!'
-        },
-    ]
-}, function (err, product) {
+productData.map((product) => Product.create(product, function (err, product) {
     if (err) {
-        console.error(err);
+        console.trace(err);
     } else {
-        console.log(`Product ${product.name} has been added to database.`)
+        console.log(`Product ${product.name} has been added to database.`);
     }
-});
-
-Product.create({
-    name: 'Supreme T-Shirt V2',
-    brand: 'Supreme',
-    price: 199.99,
-    options: [
-        { color: 'red' },
-        { size: 'M' }
-    ],
-    reviews: [
-        {
-            name: 'Helen',
-            review: 'Very nice!!'
-        }
-    ]
-}, function (err, product) {
-    if (err) {
-        console.error(err);
-    } else {
-        console.log(`Product ${product.name} has been added to database.`)
-    }
-});
+}));
 
 export default Product;
