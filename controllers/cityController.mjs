@@ -29,7 +29,7 @@ export default class CityController {
                  res.status(500).send({error: err});
              } else {
                  console.log(`City ${city.name} has been added to database.`);
-                 res.status(200).json(city);
+                 res.status(200).json([city]);
              }
         });
     }
@@ -48,7 +48,7 @@ export default class CityController {
                     res.status(404).send({message: `Can't update. City with id: ${id} doesn't exists in the database`});
                 } else {
                     console.log(`City ${city.name} has been updated successfully.`);
-                    res.status(200).json(city);
+                    res.status(200).json([city]);
                 }
              }
         });
@@ -65,7 +65,7 @@ export default class CityController {
                     res.status(404).json({message: `City with id: ${id} doesn't exists in the database.`});
                 } else {
                     console.log(`City ${city.name} has been deleted successfully.`);
-                    res.status(200).json(city);
+                    res.status(200).json([city]);
                 }
             }
         });

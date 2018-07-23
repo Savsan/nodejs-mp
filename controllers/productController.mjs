@@ -12,7 +12,6 @@ export default class ProductController {
             } else {
                 res.status(200).json(products);
             }
-
         });
     }
 
@@ -23,7 +22,7 @@ export default class ProductController {
             if (err) {
                 res.status(500).send({error: err});
             } else {
-                res.status(200).json(product);
+                res.status(200).json([product]);
             }
         });
     }
@@ -62,7 +61,7 @@ export default class ProductController {
                 res.status(500).send({error: err});
             } else {
                 console.log(`Product ${product.name} has been added to database.`);
-                res.status(200).json(product);
+                res.status(200).json([product]);
             }
         });
     }
@@ -78,7 +77,7 @@ export default class ProductController {
                     res.status(404).json({message: `Product with id: ${id} doesn't exists in the database.`});
                 } else {
                     console.log(`Product: ${product.name} has been deleted from the database.`)
-                    res.status(200).json(product);
+                    res.status(200).json([product]);
                 }
             }
         });
