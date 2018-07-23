@@ -4,6 +4,10 @@ import db from './database';
 import { cookieParser, queryParser } from './middlewares'
 import sessionConfig from './config/sessionConfig';
 import { productRouter, userRouter, cityRouter } from './routes';
+import SwaggerUI from 'swagger-ui-express';
+import YAML from 'yamljs';
+
+const swaggerDoc = YAML.load('./swagger/swagger.yaml');
 
 db.then(
     () => { console.log('Connection to the database has been established successfully.') },
@@ -23,5 +27,7 @@ app.use('/api',
     userRouter,
     cityRouter
 );
+
+app.use('/api/docs', SwaggerUI.serve, SwaggerUI.setup(swaggerDoc));
 
 export default app;

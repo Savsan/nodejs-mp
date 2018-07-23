@@ -1,0 +1,473 @@
+swagger: '2.0'
+info:
+  description: This is a simple NodeJS train API
+  version: 1.0.0
+  title: NodeJS API
+  # put the contact info for your development or API team
+  contact:
+    email: vorobev.profi@gmail.com
+host: localhost:9090
+basePath: /
+schemes:
+ - http
+# tags are used for organizing operations
+tags:
+- name: users
+  description: Operations available to all
+- name: products
+  description: Operations available to all
+- name: cities
+  description: Operations available to all
+
+paths:
+  /api/users:
+    get:
+      tags:
+      - users
+      summary: Get all users
+      operationId: recieveAllUsers
+      description: |
+        Returns all users in the system
+      produces:
+      - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+        500:
+          description: error
+        404:
+          description: message
+  /api/users/{id}:
+    delete:
+      tags:
+      - users
+      operationId: deleteUser
+      description: Delete user with a passed ID
+      summary: Delete a user by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          description: ID of the user to delete in a database
+      produces:
+      - application/json
+      responses:
+        200:
+          description: Item of deleted user
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+        500:
+          description: error
+        404:
+          description: message
+  /api/products:
+    get:
+      tags:
+      - products
+      summary: Get all products
+      operationId: recieveAllProducts
+      description: |
+        Returns all products in the system
+      produces:
+      - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
+        500:
+          description: error
+        404:
+          description: message
+    post:
+      tags:
+      - products
+      summary: Add new product
+      operationId: addProduct
+      description: |
+        Add new product to the databade
+      produces:
+      - application/json
+      parameters:
+        - name: product
+          in: body
+          description: Object with a product data
+          schema:
+            type: string
+            required:
+            - name
+            - brand
+            - price
+            properties:
+              name:
+                type: string
+                example: MacBook Pro
+              brand:
+                type: string
+                example: Apple
+              price:
+                type: integer
+                example: 1400
+              options:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    color:
+                      type: string
+                      example: blue
+                    size:
+                      type: string
+                      example: XL
+              reviews:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      example: Nick
+                    review:
+                      type: string
+                      example: Some review text
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
+        500:
+          description: error
+  /api/products/{id}:
+    get:
+      tags:
+      - products
+      summary: Get product by ID
+      operationId: recieveProductById
+      description: |
+        Returns product with a passed ID
+      produces:
+      - application/json
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+          description: ID of the product
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
+        500:
+          description: error
+    delete:
+      tags:
+      - products
+      summary: Delete product by ID
+      operationId: deleteProductById
+      description: |
+        Delete the product with a passed ID
+      produces:
+      - application/json
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+          description: ID of the product
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
+        500:
+          description: error
+        404:
+          description: message
+  /api/products/{id}/reviews:
+    get:
+      tags:
+      - products
+      summary: Get review of the product
+      operationId: recieveReviewsByProduct
+      description: |
+        Returns all reviews of the product
+      produces:
+      - application/json
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+          description: ID of the product
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Nick
+                review:
+                  type: string
+                  example: Some review text
+        500:
+          description: error
+        404:
+          description: message
+  /api/cities:
+    get:
+      tags:
+      - cities
+      summary: Get random city
+      operationId: recieveAllCities
+      description: |
+        Returns random city from the database
+      produces:
+      - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/City'
+        500:
+          description: error
+        404:
+          description: message
+    post:
+      tags:
+      - cities
+      summary: Add new city
+      operationId: addCity
+      description: |
+        Add new city to the databade
+      produces:
+      - application/json
+      parameters:
+        - name: city
+          in: body
+          description: Object with data of the city
+          schema:
+            type: object 
+            required:
+            - name
+            - country
+            - capital
+            properties:
+              name:
+                type: string
+                example: Borisov
+              country:
+                type: string
+                example: Belarus
+              capital:
+                type: boolean
+                example: false
+              location:
+                type: object
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/City'
+        500:
+          description: error
+  /api/cities/{id}:
+    put:
+      tags:
+      - cities
+      summary: Update city data
+      operationId: updateCity
+      description: |
+        Update city data with a passed ID && data
+      produces:
+      - application/json
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+          description: ID of the city
+        - name: data
+          in: body
+          description: Object with new data of the city
+          schema:
+            type: object 
+            required:
+            - name
+            - country
+            - capital
+            properties:
+              name:
+                type: string
+                example: Jodino
+              country:
+                type: string
+                example: Belarus
+              capital:
+                type: boolean
+                example: false
+              location:
+                type: object
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/City'
+        404:
+          description: message
+        500:
+          description: error
+    delete:
+      tags:
+      - cities
+      summary: Delete city
+      operationId: deleteCity
+      description: |
+        Delete city with a passed ID
+      produces:
+      - application/json
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+          description: ID of the city
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/City'
+        404:
+          description: message
+        500:
+          description: error
+definitions:
+  Product:
+    type: object
+    required:
+    - name
+    - brand
+    - price
+    properties:
+      _id:
+        type: string
+        example: 5b539dba9f651f288d5b575c
+      name:
+        type: string
+        example: MacBook Pro
+      brand:
+        type: string
+        example: Apple
+      price:
+        type: integer
+        example: 1400
+      options:
+        type: array
+        items:
+          type: object
+          properties:
+            color:
+              type: string
+              example: blue
+            size:
+              type: string
+              example: XL
+      reviews:
+        type: array
+        items:
+          type: object
+          properties:
+            name:
+              type: string
+              example: Nick
+            review:
+              type: string
+              example: Some review text
+      created_on:
+        type: string
+        example: 2018-07-21T20:55:22.056Z
+  City:
+    type: object
+    required:
+    - name
+    - country
+    - capital
+    properties:
+      _id:
+        type: string
+        example: 5b539dba9f651f288d5b575c
+      name:
+        type: string
+        example: Borisov
+      country:
+        type: string
+        example: Belarus
+      capital:
+        type: boolean
+        example: false
+      location:
+        type: object
+      created_on:
+        type: string
+        example: 2018-07-21T20:55:22.056Z
+  User:
+    type: object
+    required:
+    - firstName
+    - lastName
+    - username
+    - password
+    - email
+    - status
+    properties:
+      _id:
+        type: string
+        example: 5b539dba9f651f288d5b575c
+      firstName:
+        type: string
+        example: Alex
+      lastName:
+        type: string
+        example: Varabyou
+      username:
+        type: string
+        example: padawan
+      password:
+        type: string
+        example: pass777
+      email:
+        type: string
+        example: mailname@host.com
+      status:
+        type: string
+        example: user
+      created_on:
+        type: string
+        example: 2018-07-21T20:55:22.056Z
