@@ -1,4 +1,4 @@
-Task-7
+Task-8
 =======
 
 **NOTE:** use NodeJS v10.0.0+ && MongoDB v4.0.0+
@@ -13,16 +13,6 @@ Run commands:
 - install MongoDB Compass
 - Connect to MongoDB server and create an empty database "nodejs-test-db" via MongoDB Compass
 - npm run dev
-
-- curl -X GET localhost:9090/api/products
-- curl -X GET localhost:9090/api/products/ "Get an id from table via MongoDB Compass"
-- curl -X GET localhost:9090/api/products/ "Get an id from table via MongoDB Compass" /reviews
-- curl -X POST --data "name=Valenki&brand=Reebok&price=500&options=[]&reviews=[]" localhost:9090/api/products
-- curl -X DELETE localhost:9090/api/products/ "Get an id from table via MongoDB Compass"
-- curl -X GET localhost:9090/api/users
-- curl -X DELETE localhost:9090/api/users/ "Get an id from table via MongoDB Compass"
-- curl -X GET localhost:9090/api/cities
-- curl -X POST --data "name=Borisov&country=Belarus&capital=false&location={lat: 52.097621, long: 23.734050}" localhost:9090/api/cities
-- curl -X PUT --data "name=Orsha&country=Belarus&capital=false&location={lat: 52.097621, long: 23.734050}" localhost:9090/api/cities/ "Get an id from table via MongoDB Compass"
+- visit localhost:9090/api/docs page to read API documentation and test it
 
 ```
